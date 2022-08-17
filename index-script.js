@@ -28,7 +28,6 @@ class Product{
 
             let td_name = tr.insertCell()
             let td_delete = tr.insertCell()
-            let td_done = tr.insertCell()
 
             td_name.innerText = this.arrayProducts[interval].nameproduct
 
@@ -38,19 +37,12 @@ class Product{
             
             let buttonDelete = document.createElement("button")
             buttonDelete.innerText = "Excluir"
-            
-            let buttonDone = document.createElement("button")
-            buttonDone.innerText = "Feito"
 
             buttonDelete.setAttribute("onclick", "product.deleteProduct("+this.arrayProducts[interval].id+")")
 
-            buttonDone.setAttribute("onclick", "product.doneProduct("+JSON.stringify(this.arrayProducts[interval])+")")
-
             td_delete.appendChild(buttonDelete)
-            td_done.appendChild(buttonDone)
             
             buttonDelete.classList.add("delete")
-            buttonDone.classList.add("done")
 
             
         }
@@ -98,17 +90,20 @@ class Product{
         }
     }
 
-    doneProduct(data){
-        
-
-        
-    }
-
     clearData(){
         document.querySelector("#product").value = ""
         document.querySelector("#product").focus()
     }
 }
 
+
 var product = new Product()
 
+document.addEventListener("keydown", function(event){
+    console.log(event.key)
+    
+    if(event.key === "Enter"){
+        product.save()
+    }
+
+})
